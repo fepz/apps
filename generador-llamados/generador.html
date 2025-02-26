@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Generador de Llamados</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        select, input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .date-container {
+            display: flex;
+            gap: 10px;
+        }
+        .date-group {
+            flex: 1;
+        }
+        input[type="date"] {
+            width: 95%;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        #resultado {
+            white-space: pre-wrap;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            margin-top: 20px;
+        }
+        select {
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Generador de Llamados</h1>
+    
+    <div class="form-group">
+        <div class="date-container">
+            <div class="date-group">
+            <label for="cargo">Cargo:</label>
+            <select id="cargo">
+                <option value="PROFESOR ADJUNTO">PROFESOR ADJUNTO</option>
+                <option value="JTP">JTP</option>
+                <option value="AUXILIAR DE PRIMERA">AUXILIAR DE PRIMERA</option>
+            </select>
+            </div>
+
+            <div class="date-group">
+            <label for="dedicacion">Dedicación:</label>
+            <select id="dedicacion">
+                <option value="SIMPLE">SIMPLE</option>
+                <option value="SEMIEXCLUSIVA">SEMIEXCLUSIVA</option>
+                <option value="EXCLUSIVA">EXCLUSIVA</option>
+            </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Período:</label>
+        <div class="date-container">
+            <div class="date-group">
+                <label for="fecha_inicio">Fecha inicio:</label>
+                <input type="date" id="fecha_inicio" required>
+            </div>
+            <div class="date-group">
+                <label for="fecha_fin">Fecha fin:</label>
+                <input type="date" id="fecha_fin" required>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="asignatura">Asignatura:</label>
+        <select id="asignatura">
+            <option value="IF001">IF001 - Elementos de Informática</option>
+            <option value="MA045">MA045 - Álgebra</option>
+            <option value="IF002">IF002 - Expresión de Problemas y Algoritmos</option>
+            <option value="IF003">IF003 - Algorítmica y Programación I</option>
+            <option value="MA046">MA046 - Análisis Matemático</option>
+            <option value="MA008">MA008 - Elementos de Lógica y Matemática Discreta</option>
+            <option value="IF004">IF004 - Sistemas y Organizaciones</option>
+            <option value="IF005">IF005 - Arquitectura de Computadoras</option>
+            <option value="IF006">IF006 - Algorítmica y Programación II</option>
+            <option value="IF007">IF007 - Bases de Datos I</option>
+            <option value="MA006">MA006 - Estadística</option>
+            <option value="IF008">IF008 - Programación Orientada a Objetos</option>
+            <option value="IF009">IF009 - Laboratorio de Programación y Lenguajes</option>
+            <option value="IF010">IF010 - Análisis y Diseño de Sistemas</option>
+            <option value="IF011">IF011 - Sistemas Operativos</option>
+            <option value="IF012">IF012 - Desarrollo de Software</option>
+            <option value="IF013">IF013 - Fundamentos Teóricos de Informática</option>
+            <option value="MA047">MA047 - Complementos Matemáticos</option>
+            <option value="IF015">IF015 - Ingeniería de Software</option>
+            <option value="IF019">IF019 - Redes y Transmisión de Datos</option>
+            <option value="IF018">IF018 - Inteligencia Artificial</option>
+            <option value="IF016">IF016 - Aspectos Legales y Profesionales</option>
+            <option value="IF020">IF020 - Paradigmas y Lenguajes de Programación</option>
+            <option value="IF022">IF022 - Sistemas Distribuidos</option>
+            <option value="IF017">IF017 - Taller de Nuevas Tecnologías</option>
+            <option value="IF021">IF021 - Arquitectura de Redes y Servicios</option>
+            <option value="IF025">IF025 - Sistemas Embebidos y de Tiempo real</option>
+            <option value="IF014">IF014 - Bases de Datos II (optativa)</option>
+            <option value="IF024">IF024 - Informática Industrial (optativa)</option>
+            <option value="IF053">IF053 - Planificación y Gestión de Sistemas de Información (optativa)</option>
+            <option value="IF023">IF023 - Diseño de aplicaciones Web (optativa)</option>
+            <option value="IF027">IF027 - Modelos y Simulación (optativa)</option>
+            <option value="IF028">IF028 - Monitorización y Visualización (optativa)</option>
+            <option value="IF034">IF034 - Sistemas Paralelos –LI (optativa)</option>
+        </select>
+    </div>
+
+    <div class="button-group">
+        <button onclick="generarLlamado()">Generar llamado</button>
+        <button onclick="clearForm()" style="background-color: #dc3545">Limpiar</button>
+    </div>
+
+    <div id="resultado"></div>
+
+    <div class="button-group">
+        <button onclick="copyToClipboard()" class="copy-button">Copiar al Portapapeles</button>
+    </div>
+
+    <script>
+        const asignaturas = {
+            'IF001': {
+                nombre: 'Elementos de Informática',
+                contenidos: `Historia de la Computación. Computación y sociedad.
+Sistemas de numeración.
+Arquitectura y organización de computadoras.
+Representación de los datos a nivel máquina. Error.
+Conceptos de software, sistemas operativos, lenguajes de programación.
+Nociones de interpretación y compilación.`
+            },
+            'MA045': {
+                nombre: 'Álgebra',
+                contenidos: `Estructuras Algebraicas
+Sistemas de ecuaciones lineales y matrices.
+Determinantes.
+Vectores en los espacios bidimensional y tridimensional.
+Espacios vectoriales.
+Transformaciones lineales.
+Valores y vectores propios.
+Geometría de las transformaciones lineales del plano.`
+            },
+            'IF002': {
+                nombre: 'Expresión de Problemas y Algoritmos',
+                contenidos: `Análisis y resolución de problemas.
+Especificación simbólica.
+Expresión de soluciones en un lenguaje algorítmico.`
+            },
+            'IF003': {
+                nombre: 'Algorítmica y Programación I',
+                contenidos: `Análisis y diseño de algoritmos.
+Tipos de datos y estructuras de datos elementales. Representación en memoria.
+Estructuras de control. Programación estructurada.
+Procedimientos y funciones.
+Recursividad.
+Algoritmos fundamentales: recorrido, búsqueda, ordenamiento, actualización.`
+            },
+            'MA046': {
+                nombre: 'Análisis Matemático',
+                contenidos: `Funciones reales de una variable.
+Límite funcional y continuidad.
+Cálculo Diferencial.
+Cálculo Integral.
+Sucesiones y series numéricas.
+Funciones de varias variables reales.
+Diferenciabilidad.`
+            }
+        };
+
+        function formatDate(date) {
+            const d = new Date(date);
+            const day = d.getDate().toString().padStart(2, '0');
+            const month = (d.getMonth() + 1).toString().padStart(2, '0');
+            const year = d.getFullYear();
+            return `${day}/${month}/${year}`;
+        }
+
+        function generarLlamado() {
+            const cargo = document.getElementById('cargo').value;
+            const dedicacion = document.getElementById('dedicacion').value;
+            const fecha_inicio = document.getElementById('fecha_inicio').value;
+            const fecha_fin = document.getElementById('fecha_fin').value;
+            const asignaturaId = document.getElementById('asignatura').value;
+            const asignaturaNombre = asignaturas[asignaturaId].nombre;
+            //const contenidos = asignaturas[asignaturaId].contenidos;
+            // Emoji a agregar
+            const emoji = "-";
+            const contenidos = asignaturas[asignaturaId].contenidos.split('\n').map(line => `${emoji} ${line}`).join('\n');
+
+            if (!fecha_inicio || !fecha_fin) {
+                alert('Por favor, complete las fechas de inicio y fin del período.');
+                return;
+            }
+
+            const periodo = `${formatDate(fecha_inicio)} al ${formatDate(fecha_fin)}`;
+
+            const template = `📢 Llamado a inscripción para cubrir 1 (un) cargo de ${cargo} dedicación ${dedicacion} en la asignatura ${asignaturaId} ${asignaturaNombre} de la Facultad de Ingeniería Sede Puerto Madryn.
+📅 Período del llamado: ${periodo}.
+📚 Los contenidos mínimos son:
+${contenidos}
+🎓 Requisito: Tener título de grado habilitante. Posesión de título superior a 2 años.
+📝 Presentar: Currículum Vitae y antecedentes relacionados con el cargo solicitado. Los postulantes deberán presentar plan de trabajo.
+🔎 Para la selección se realizará una prueba de oposición y entrevista personal.
+⚠️ Criterios que se considerarán en la evaluación:
+- Antecedentes en docencia.
+- Antecedentes profesionales.
+- Formación de posgrado/actualización.
+- Antecedentes en Investigación y Desarrollo.
+👉 Consultas: Coordinación del Departamento de Informática, vía e-mail a romistickar@gmail.com
+📧 Inscripción: ${periodo}. Enviar CV y plan de trabajo vía e-mail a informaticapm@ing.unp.edu.ar`;
+
+            document.getElementById('resultado').textContent = template;
+        }
+
+        function copyToClipboard() {
+            const output = document.getElementById('resultado').textContent;
+            if (output) {
+                navigator.clipboard.writeText(output)
+                    .then(() => alert('¡Texto copiado al portapapeles!'))
+                    .catch(err => alert('Error al copiar el texto: ' + err));
+            }
+        }
+
+        function clearForm() {
+            document.getElementById('cargo').value = '';
+            document.getElementById('dedicacion').value = '';
+            document.getElementById('asignatura').value = '';
+            document.getElementById('fecha_inicio').value = '';
+            document.getElementById('fecha_fin').value = '';
+            document.getElementById('resultado').textContent = '';
+        }
+    </script>
+</body>
+</html>

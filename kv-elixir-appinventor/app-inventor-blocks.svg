@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 700">
+  <!-- Fondo -->
+  <rect width="600" height="700" fill="#f5f5f5"/>
+  
+  <!-- Variable Global -->
+  <rect x="50" y="50" width="200" height="30" rx="5" ry="5" fill="#4a6cd4" stroke="#3a5cb4"/>
+  <text x="70" y="70" font-family="Arial" font-size="12" fill="white">initializar global baseUrl</text>
+  <rect x="250" y="50" width="250" height="30" rx="5" ry="5" fill="#7d9fe5" stroke="#4a6cd4"/>
+  <text x="270" y="70" font-family="Arial" font-size="12" fill="white">"http://TU_IP_SERVIDOR:4000/api/kv"</text>
+  
+  <!-- Bloque ButtonGuardar.Click -->
+  <rect x="50" y="100" width="250" height="30" rx="5" ry="5" fill="#f89e31" stroke="#d87b1a"/>
+  <text x="70" y="120" font-family="Arial" font-size="12" fill="white">cuando ButtonGuardar.Click</text>
+  <rect x="70" y="130" width="450" height="120" rx="0" ry="0" fill="#fbc575" stroke="#f89e31" stroke-dasharray="5,2"/>
+  <rect x="90" y="150" width="350" height="80" rx="5" ry="5" fill="#f9a842" stroke="#f89e31"/>
+  <text x="110" y="170" font-family="Arial" font-size="12" fill="white">si TextBoxClave.Text está vacío entonces</text>
+  <rect x="110" y="180" width="300" height="20" rx="0" ry="0" fill="#fbc575" stroke="#f9a842" stroke-dasharray="5,2"/>
+  <rect x="130" y="180" width="250" height="20" rx="5" ry="5" fill="#25ae60" stroke="#179447"/>
+  <text x="150" y="195" font-family="Arial" font-size="10" fill="white">mostrar notificación "Clave no puede estar vacía"</text>
+  <text x="110" y="215" font-family="Arial" font-size="12" fill="white">si no</text>
+  <rect x="110" y="225" width="300" height="20" rx="0" ry="0" fill="#fbc575" stroke="#f9a842" stroke-dasharray="5,2"/>
+  <rect x="130" y="225" width="250" height="20" rx="5" ry="5" fill="#4a6cd4" stroke="#3a5cb4"/>
+  <text x="150" y="240" font-family="Arial" font-size="10" fill="white">llamar Web.PostText con baseUrl y JSON</text>
+  
+  <!-- Bloque ButtonObtener.Click -->
+  <rect x="50" y="270" width="250" height="30" rx="5" ry="5" fill="#f89e31" stroke="#d87b1a"/>
+  <text x="70" y="290" font-family="Arial" font-size="12" fill="white">cuando ButtonObtener.Click</text>
+  <rect x="70" y="300" width="450" height="100" rx="0" ry="0" fill="#fbc575" stroke="#f89e31" stroke-dasharray="5,2"/>
+  <rect x="90" y="320" width="350" height="60" rx="5" ry="5" fill="#f9a842" stroke="#f89e31"/>
+  <text x="110" y="340" font-family="Arial" font-size="12" fill="white">si TextBoxClave.Text está vacío entonces</text>
+  <rect x="110" y="350" width="300" height="20" rx="0" ry="0" fill="#fbc575" stroke="#f9a842" stroke-dasharray="5,2"/>
+  <rect x="130" y="350" width="250" height="20" rx="5" ry="5" fill="#25ae60" stroke="#179447"/>
+  <text x="150" y="365" font-family="Arial" font-size="10" fill="white">mostrar notificación "Clave no puede estar vacía"</text>
+  <rect x="130" y="380" width="250" height="20" rx="5" ry="5" fill="#4a6cd4" stroke="#3a5cb4"/>
+  <text x="150" y="395" font-family="Arial" font-size="10" fill="white">llamar Web.Get con URL concatenada</text>
+  
+  <!-- Bloque ButtonEliminar.Click (similar a Obtener) -->
+  <rect x="50" y="420" width="250" height="30" rx="5" ry="5" fill="#f89e31" stroke="#d87b1a"/>
+  <text x="70" y="440" font-family="Arial" font-size="12" fill="white">cuando ButtonEliminar.Click</text>
+  <rect x="70" y="450" width="450" height="60" rx="0" ry="0" fill="#fbc575" stroke="#f89e31" stroke-dasharray="5,2"/>
+  <rect x="130" y="480" width="250" height="20" rx="5" ry="5" fill="#4a6cd4" stroke="#3a5cb4"/>
+  <text x="150" y="495" font-family="Arial" font-size="10" fill="white">llamar Web.Delete con URL concatenada</text>
+  
+  <!-- Bloque ButtonListarTodos.Click -->
+  <rect x="50" y="530" width="250" height="30" rx="5" ry="5" fill="#f89e31" stroke="#d87b1a"/>
+  <text x="70" y="550" font-family="Arial" font-size="12" fill="white">cuando ButtonListarTodos.Click</text>
+  <rect x="70" y="560" width="450" height="40" rx="0" ry="0" fill="#fbc575" stroke="#f89e31" stroke-dasharray="5,2"/>
+  <rect x="90" y="570" width="250" height="20" rx="5" ry="5" fill="#4a6cd4" stroke="#3a5cb4"/>
+  <text x="110" y="585" font-family="Arial" font-size="10" fill="white">llamar Web.Get con baseUrl</text>
+  
+  <!-- Bloque Web.GotText -->
+  <rect x="50" y="620" width="250" height="30" rx="5" ry="5" fill="#f89e31" stroke="#d87b1a"/>
+  <text x="70" y="640" font-family="Arial" font-size="12" fill="white">cuando Web.GotText</text>
+  <rect x="70" y="650" width="450" height="40" rx="0" ry="0" fill="#fbc575" stroke="#f89e31" stroke-dasharray="5,2"/>
+  <rect x="90" y="660" width="350" height="20" rx="5" ry="5" fill="#f9a842" stroke="#f89e31"/>
+  <text x="110" y="675" font-family="Arial" font-size="10" fill="white">procesar respuesta JSON y actualizar ListViewResultados</text>
+</svg>
