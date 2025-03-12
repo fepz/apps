@@ -75,6 +75,7 @@
                 <option value="PROFESOR ADJUNTO">PROFESOR ADJUNTO</option>
                 <option value="JTP">JTP</option>
                 <option value="AUXILIAR DE PRIMERA">AUXILIAR DE PRIMERA</option>
+                <option value="AUXILIAR ALUMNO">AUXILIAR ALUMNO</option>
             </select>
             </div>
 
@@ -200,6 +201,10 @@ Cálculo Integral.
 Sucesiones y series numéricas.
 Funciones de varias variables reales.
 Diferenciabilidad.`
+            },
+            'MA008': {
+                nombre: 'Elementos de Lógica y matemática discreta',
+                contenidos: `Lógica proposicional y de primer orden. Técnicas de prueba. Números enteros, principio de inducción. Relaciones y dígrafos. Conjuntos parcialmente ordenados. Reticulados.`
             }
         };
 
@@ -217,15 +222,36 @@ Diferenciabilidad.`
             const fecha_inicio = document.getElementById('fecha_inicio').value;
             const fecha_fin = document.getElementById('fecha_fin').value;
             const asignaturaId = document.getElementById('asignatura').value;
-            const asignaturaNombre = asignaturas[asignaturaId].nombre;
-            //const contenidos = asignaturas[asignaturaId].contenidos;
+
             // Emoji a agregar
-            const emoji = "-";
-            const contenidos = asignaturas[asignaturaId].contenidos.split('\n').map(line => `${emoji} ${line}`).join('\n');
+            const line = "-";
+            let asignaturaNombre = '';
+
+            let contenidos = '';
+            if (asignaturas[asignaturaId]) {
+                asignaturaNombre = asignaturas[asignaturaId].nombre;
+                contenidos = asignaturas[asignaturaId].contenidos.split(". ").map(line => `- ${line}`).join('\n');
+            } else {
+                asignaturaNombre = "DEFINIR ASIGNATURA"; 
+                contenidos = "- DEFINIR PROGRAMA";
+            }
 
             if (!fecha_inicio || !fecha_fin) {
                 alert('Por favor, complete las fechas de inicio y fin del período.');
                 return;
+            }
+
+            // Determinar el departamento según el código de la asignatura
+            let departamento = '';
+            let departamento_email = '';
+            if (asignaturaId.startsWith('MA')) {
+                departamento = 'Departamento de Matemática';
+                coordinador_email = 'cadmatematicapm@gmail.com';
+                departamento_email = 'cadmatematicapm@gmail.com';
+            } else if (asignaturaId.startsWith('IF')) {
+                departamento = 'Departamento de Informática';
+                coordinador_email = 'romistickar@gmail.com';
+                departamento_email = 'informaticapm@ing.unp.edu.ar';
             }
 
             const periodo = `${formatDate(fecha_inicio)} al ${formatDate(fecha_fin)}`;
@@ -242,8 +268,8 @@ ${contenidos}
 - Antecedentes profesionales.
 - Formación de posgrado/actualización.
 - Antecedentes en Investigación y Desarrollo.
-👉 Consultas: Coordinación del Departamento de Informática, vía e-mail a romistickar@gmail.com
-📧 Inscripción: ${periodo}. Enviar CV y plan de trabajo vía e-mail a informaticapm@ing.unp.edu.ar`;
+👉 Consultas: Coordinación del ${departamento}, vía e-mail a ${coordinador_email}
+📧 Inscripción: ${periodo}. Enviar CV y plan de trabajo vía e-mail a ${departamento_email}`
 
             document.getElementById('resultado').textContent = template;
         }
